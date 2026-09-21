@@ -1,7 +1,8 @@
 <%= form_with(model: recipe) do |form| %>
   <% if recipe.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+      <h2><%= pluralize(recipe.errors.count, "error") %>
+        prohibited this recipe from being saved:</h2>
 
       <ul>
         <% recipe.errors.each do |error| %>
@@ -19,6 +20,24 @@
   <div>
     <%= form.label :prep_time_minutes, style: "display: block" %>
     <%= form.number_field :prep_time_minutes %>
+  </div>
+
+  <div data-controller="ingredients-form">
+    <h3>Zutaten</h3>
+
+    <div data-ingredients-form-target="fields">
+      <%= form.fields_for :ingredients do |ingredient_form| %>
+        <%= render "ingredient_fields", f: ingredient_form %>
+      <% end %>
+    </div>
+
+    <template data-ingredients-form-target="template">
+      <%= form.fields_for :ingredients, Ingredient.new, child_index: "NEW_RECORD" do |ingredient_form| %>
+        <%= render "ingredient_fields", f: ingredient_form %>
+      <% end %>
+    </template>
+
+    <button data-action="click->ingredients-form#add">+</button>
   </div>
 
   <div>

@@ -1,0 +1,23 @@
+<div class="ingredient-field">
+  <div>
+    <%= f.label :name, "Zutat" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :amount, "Menge" %>
+    <%= f.number_field :amount, step: "any", min: 0.1 %>
+  </div>
+
+  <div>
+    <%= f.label :unit, "Einheit" %>
+    <%= f.text_field :unit, placeholder: "z.B. g, ml, EL, Stück" %>
+  </div>
+
+  <div>
+    <% if f.object.persisted? %>
+      <%= f.hidden_field :_destroy %>
+    <% end %>
+    <button data-action="click->ingredients-form#remove">Löschen</button>
+  </div>
+</div>

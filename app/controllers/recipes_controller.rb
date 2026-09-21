@@ -13,10 +13,13 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
+
+    @recipe.ingredients.build
   end
 
   # GET /recipes/1/edit
   def edit
+    @recipe.ingredients.build if @recipe.ingredients.empty?
   end
 
   # POST /recipes or /recipes.json
@@ -65,6 +68,32 @@ class RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.expect(recipe: [ :title, :prep_time_minutes, :instructions, :is_published ])
+      params.require(:recipe).permit(
+        :title,
+        :prep_time_minutes,
+        :instructions,
+        :is_published,
+        ingredients_attributes: [
+          :id,
+          :name,
+          :amount,
+          :unit,
+          :_destroy
+        ]
+      )
+
+      # params.expect(recipe: [
+      #   :title,
+      #   :prep_time_minutes,
+      #   :instructions,
+      #   :is_published,
+      #   ingredients_attributes: [
+      #     :id,
+      #     :name,
+      #     :amount,
+      #     :unit,
+      #     :_destroy
+      #   ]
+      # ])
     end
 end

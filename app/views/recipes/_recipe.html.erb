@@ -10,6 +10,19 @@
   </div>
 
   <div>
+    <p><strong>Zutaten</strong></p>
+    <ul>
+      <% recipe.ingredients.each do |ingredient| %>
+        <li>
+          <%= ingredient.amount %>
+          <%= ingredient.unit %>
+          <%= ingredient.name %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div>
     <strong>Instructions:</strong>
     <%= recipe.instructions %>
   </div>

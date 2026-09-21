@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "registrations/new"
+  get "registrations/create"
   resource :session
   resources :passwords, param: :token
   root to: "recipes#index"

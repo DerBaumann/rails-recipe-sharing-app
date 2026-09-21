@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get "registrations/new"
-  get "registrations/create"
+  resources :registrations, only: [ :new, :create ], path: "signup"
   resource :session
   resources :passwords, param: :token
   root to: "recipes#index"

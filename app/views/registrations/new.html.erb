@@ -1,6 +1,19 @@
 <h1>Registration</h1>
 
 <%= form_with model: @user, url: registrations_path do |form| %>
+  <% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, "Fehler") %>
+        verhinderten die Registrierung:</h2>
+
+      <ul>
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div>
     <%= form.label :email_address %><br>
     <%= form.email_field :email_address,

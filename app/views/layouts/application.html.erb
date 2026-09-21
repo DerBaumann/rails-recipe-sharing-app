@@ -24,6 +24,18 @@
   </head>
 
   <body>
+    <nav>
+      <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Favoriten", "#" %></li>
+        <li><%= link_to "Login", new_session_path unless authenticated? %></li>
+        <li><%= link_to "Registrieren", new_registration_path unless authenticated? %></li>
+        <li><%= if authenticated?
+            link_to "Logout", session_path, data: { turbo_method: :delete }
+          end %></li>
+      </ul>
+    </nav>
+
     <%= yield %>
   </body>
 </html>

@@ -1,33 +1,34 @@
-<h1>Registration</h1>
+<h1 class="text-3xl font-bold mb-8">Registration</h1>
 
 <%= form_with model: @user, url: registrations_path do |form| %>
   <% if @user.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "Fehler") %>
-        verhinderten die Registrierung:</h2>
-
       <ul>
         <% @user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li role="alert" class="alert alert-error my-4"><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :email_address %><br>
+  <fieldset class="fieldset">
+    <%= form.label :email_address, class: "label" %>
     <%= form.email_field :email_address,
                      required: true,
                      autofocus: true,
-                     autocomplete: "username" %><br>
+                     autocomplete: "username",
+                     class: "input" %>
+  </fieldset>
+  <fieldset class="fieldset">
+    <%= form.label :password, class: "label" %>
+    <%= form.password_field :password, required: true, class: "input" %>
+  </fieldset>
+  <fieldset class="fieldset">
+    <%= form.label :password_confirmation, class: "label" %>
+    <%= form.password_field :password_confirmation, required: true, class: "input" %>
+  </fieldset>
+  <div class="flex gap-4 mt-4">
+    <%= link_to "Abbrechen", root_path, class: "btn btn-neutral" %>
+    <%= form.submit "Sign in", class: "btn btn-primary" %>
   </div>
-  <div>
-    <%= form.label :password %><br>
-    <%= form.password_field :password, required: true %><br>
-  </div>
-  <div>
-    <%= form.label :password_confirmation %><br>
-    <%= form.password_field :password_confirmation, required: true %><br>
-  </div>
-  <%= form.submit "Sign in" %>
 <% end %>

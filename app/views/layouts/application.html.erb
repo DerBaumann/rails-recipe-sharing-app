@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="light">
   <head>
     <title><%= content_for(:title) || "Recipe Sharing App" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -24,16 +24,31 @@
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Favoriten", "#" %></li>
-        <li><%= link_to "Login", new_session_path unless authenticated? %></li>
-        <li><%= link_to "Registrieren", new_registration_path unless authenticated? %></li>
-        <li><%= if authenticated?
-            link_to "Logout", session_path, data: { turbo_method: :delete }
-          end %></li>
-      </ul>
+    <nav class="navbar bg-base-200 shadow-md mb-8">
+      <div class="navbar-start">
+        <ul class="flex gap-8">
+          <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
+          <li><%= link_to "Favoriten", "#", class: "btn btn-secondary" %></li>
+        </ul>
+      </div>
+      <div class="navbar-center">
+        <p class="text-xl font-bold">Recipe Sharing App</p>
+      </div>
+      <div class="navbar-end">
+        <ul class="flex gap-8">
+          <% if authenticated? %>
+            <li><%= link_to "Logout",
+              session_path,
+              data: {
+                turbo_method: :delete,
+              },
+              class: "btn btn-accent" %></li>
+          <% else %>
+            <li><%= link_to "Login", new_session_path, class: "btn btn-accent" %></li>
+            <li><%= link_to "Registrieren", new_registration_path, class: "btn btn-accent" %></li>
+          <% end %>
+        </ul>
+      </div>
     </nav>
 
     <%= yield %>

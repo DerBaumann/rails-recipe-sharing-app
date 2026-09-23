@@ -2,10 +2,12 @@
 
 <% content_for :title, "Recipes" %>
 
-<div class="flex gap-4">
-  <%= link_to "Neues Rezept", new_recipe_path, class: "btn btn-primary" %>
-  <%= link_to "Favoriten", "#", class: "btn btn-secondary" %>
-</div>
+<% if authenticated? %>
+  <div class="flex gap-4">
+    <%= link_to "Neues Rezept", new_recipe_path, class: "btn btn-primary" %>
+    <%= link_to "Favoriten", "#", class: "btn btn-secondary" %>
+  </div>
+<% end %>
 
 <%# TODO: Search on input %>
 <%= form_with url: recipes_path, method: :get, data: {turbo_frame: "recipes_list"}, class:"my-4" do |form| %>
@@ -13,7 +15,10 @@
     <%= form.label :query, "Suche", class: "label" %>
     <div class="join">
       <%= form.search_field :query, value: params[:query], class: "input join-item" %>
-      <%= form.submit "Suchen", class: "btn btn-primary join-item" %>
+      <%= form.button class: "btn btn-primary join-item" do %>
+        <%= heroicon "magnifying-glass", options: { class: "w-6" } %>
+      <% end %>
+
     </div>
   </fieldset>
   <% if params[:query].present? %>

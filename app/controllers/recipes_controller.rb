@@ -1,5 +1,9 @@
 class RecipesController < ApplicationController
+  allow_unauthenticated_access only: %i[ index show ]
+  before_action :resume_session, only: %i[ index show ]
+
   before_action :set_recipe, only: %i[ show edit update destroy ]
+  before_action :authorize_owner!, only: %i[ edit update destroy ]
 
   # GET /recipes or /recipes.json
   def index
@@ -32,7 +36,7 @@ class RecipesController < ApplicationController
 
   # POST /recipes or /recipes.json
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = Current.user.recipes.build(recipe_params)
 
     respond_to do |format|
       if @recipe.save
@@ -70,6 +74,13 @@ class RecipesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def authorize_owner!
+      unless @recipe.user == Current.user
+        redirect_to recipes_path, alert: "You can only edit or delete your own recipes."
+      end
+    end
+
     def set_recipe
       @recipe = Recipe.find(params.expect(:id))
     end

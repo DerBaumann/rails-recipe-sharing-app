@@ -28,7 +28,9 @@
       <div class="navbar-start">
         <ul class="flex gap-8">
           <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
-          <li><%= link_to "Favoriten", "#", class: "btn btn-secondary" %></li>
+          <% if authenticated? %>
+            <li><%= link_to "Favoriten", "#", class: "btn btn-secondary" %></li>
+          <% end %>
         </ul>
       </div>
       <div class="navbar-center">

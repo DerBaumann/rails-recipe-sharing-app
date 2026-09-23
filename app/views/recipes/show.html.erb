@@ -24,11 +24,13 @@
 
 <div class="flex gap-4">
   <%= link_to "Back to recipes", recipes_path, class: "btn btn-neutral" %>
-  <%= button_to "Destroy this recipe",
-  @recipe,
-  method: :delete,
-  class: "btn btn-error" %>
-  <%= link_to "Edit this recipe", edit_recipe_path(@recipe), class: "btn btn-primary" %>
+  <% if @recipe.owned_by?(Current.user) %>
+    <%= button_to "Destroy this recipe",
+    @recipe,
+    method: :delete,
+    class: "btn btn-error" %>
+    <%= link_to "Edit this recipe", edit_recipe_path(@recipe), class: "btn btn-primary" %>
+  <% end %>
 </div>
 
 <hr/>

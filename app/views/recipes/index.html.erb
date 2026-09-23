@@ -2,15 +2,25 @@
 
 <% content_for :title, "Recipes" %>
 
-<h1>Recipes</h1>
-
-<div id="recipes">
-  <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
-  <% end %>
+<div class="flex gap-4">
+  <%= link_to "Neues Rezept", new_recipe_path, class: "btn btn-primary" %>
+  <%= link_to "Favoriten", "#", class: "btn btn-secondary" %>
 </div>
 
-<%= link_to "New recipe", new_recipe_path %>
+<%= form_with url: recipes_path, method: :get, data: {turbo_frame: "recipes_list"}, class:"my-4" do |form| %>
+  <fieldset class="fieldset">
+    <%= form.label :query, "Suche", class: "label" %>
+    <div class="join">
+      <%= form.search_field :query, class: "input join-item" %>
+      <%= form.submit "Suchen", class: "btn btn-primary join-item" %>
+    </div>
+  </fieldset>
+<% end %>
+
+<ul id="recipes" class="my-4 list">
+  <% @recipes.each do |recipe| %>
+    <li class="list-item">
+      <%= render recipe %>
+    </li>
+  <% end %>
+</ul>

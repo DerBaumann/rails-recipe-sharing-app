@@ -1,23 +1,26 @@
-<div class="ingredient-field">
-  <div>
-    <%= f.label :name, "Zutat" %>
-    <%= f.text_field :name %>
+<div class="ingredient-field border rounded-lg p-4 w-fit">
+  <div class="flex justify-between gap-4">
+    <fieldset class="fieldset">
+      <%= f.label :name, "Zutat", class: "label" %>
+      <%= f.text_field :name, class: "input" %>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <%= f.label :amount, "Menge", class: "label" %>
+      <%= f.number_field :amount, step: "any", min: 0.1, class: "input" %>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <%= f.label :unit, "Einheit", class: "label" %>
+      <%= f.text_field :unit, placeholder: "z.B. g, ml, EL, Stück", class: "input" %>
+    </fieldset>
   </div>
 
-  <div>
-    <%= f.label :amount, "Menge" %>
-    <%= f.number_field :amount, step: "any", min: 0.1 %>
-  </div>
-
-  <div>
-    <%= f.label :unit, "Einheit" %>
-    <%= f.text_field :unit, placeholder: "z.B. g, ml, EL, Stück" %>
-  </div>
-
+  <%# TODO: Put button in corner %>
   <div>
     <% if f.object.persisted? %>
       <%= f.hidden_field :_destroy %>
     <% end %>
-    <button data-action="click->ingredients-form#remove">Löschen</button>
+    <button data-action="click->ingredients-form#remove" class="btn btn-error">Löschen</button>
   </div>
 </div>

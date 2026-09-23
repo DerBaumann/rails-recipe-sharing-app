@@ -1,31 +1,27 @@
-<%= form_with(model: recipe) do |form| %>
+<%= form_with(model: recipe, class: "space-y-4") do |form| %>
   <% if recipe.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(recipe.errors.count, "error") %>
-        prohibited this recipe from being saved:</h2>
-
-      <ul>
-        <% recipe.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul>
+      <% recipe.errors.each do |error| %>
+        <li role="alert" class="alert alert-error my-4"><%= error.full_message %></li>
+      <% end %>
+    </ul>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
+  <fieldset class="fieldset">
+    <%= form.label :title, class: "label" %>
+    <%= form.text_field :title, class: "input" %>
+  </fieldset>
 
-  <div>
-    <%= form.label :prep_time_minutes, style: "display: block" %>
-    <%= form.number_field :prep_time_minutes %>
-  </div>
+  <fieldset class="fieldset">
+    <%= form.label :prep_time_minutes, class: "label" %>
+    <%= form.number_field :prep_time_minutes, class: "input" %>
+  </fieldset>
 
+  <%# TODO: Put ingredient fields into table %>
   <div data-controller="ingredients-form">
-    <h3>Zutaten</h3>
+    <h3 class="font-bold">Zutaten</h3>
 
-    <div data-ingredients-form-target="fields">
+    <div data-ingredients-form-target="fields" class="space-y-4 my-6">
       <%= form.fields_for :ingredients do |ingredient_form| %>
         <%= render "ingredient_fields", f: ingredient_form %>
       <% end %>
@@ -37,20 +33,20 @@
       <% end %>
     </template>
 
-    <button data-action="click->ingredients-form#add">+</button>
+    <button data-action="click->ingredients-form#add" class="btn btn-success">+</button>
   </div>
 
-  <div>
-    <%= form.label :instructions, style: "display: block" %>
-    <%= form.textarea :instructions %>
-  </div>
+  <fieldset class="fieldset">
+    <%= form.label :instructions, class: "label" %>
+    <%= form.textarea :instructions, class: "textarea h-32 w-64" %>
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <%= form.label :is_published, class: "label" %>
+    <%= form.checkbox :is_published, class: "checkbox checkbox-primary" %>
+  </fieldset>
 
   <div>
-    <%= form.label :is_published, style: "display: block" %>
-    <%= form.checkbox :is_published %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

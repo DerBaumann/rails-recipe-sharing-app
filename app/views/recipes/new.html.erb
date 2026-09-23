@@ -1,11 +1,11 @@
 <% content_for :title, "New recipe" %>
 
-<h1>New recipe</h1>
+<h1 class="h1">New recipe</h1>
 
 <%= render "form", recipe: @recipe %>
 
 <br>
 
 <div>
-  <%= link_to "Back to recipes", recipes_path %>
+  <%= link_to "Back to recipes", recipes_path, class: "btn btn-neutral" %>
 </div>

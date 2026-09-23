@@ -1,14 +1,12 @@
-<h1 class="text-3xl font-bold mb-8">Registration</h1>
+<h1 class="text-4xl font-bold mb-8">Registration</h1>
 
 <%= form_with model: @user, url: registrations_path do |form| %>
   <% if @user.errors.any? %>
-    <div style="color: red">
-      <ul>
-        <% @user.errors.each do |error| %>
-          <li role="alert" class="alert alert-error my-4"><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul>
+      <% @user.errors.each do |error| %>
+        <li role="alert" class="alert alert-error my-4"><%= error.full_message %></li>
+      <% end %>
+    </ul>
   <% end %>
 
   <fieldset class="fieldset">

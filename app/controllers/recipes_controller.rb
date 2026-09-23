@@ -3,7 +3,15 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.all
+    # base_query = if authenticated?
+    #   Recipe.published.or(Recipe.where(user: Current.user))
+    # else
+    #   Recipe.published
+    # end
+    base_query = Recipe.published
+
+
+    @recipes = base_query.search_by_title(params[:query])
   end
 
   # GET /recipes/1 or /recipes/1.json

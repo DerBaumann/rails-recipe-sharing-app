@@ -7,22 +7,32 @@
   <%= link_to "Favoriten", "#", class: "btn btn-secondary" %>
 </div>
 
+<%# TODO: Search on input %>
 <%= form_with url: recipes_path, method: :get, data: {turbo_frame: "recipes_list"}, class:"my-4" do |form| %>
   <fieldset class="fieldset">
     <%= form.label :query, "Suche", class: "label" %>
     <div class="join">
-      <%= form.search_field :query, class: "input join-item" %>
+      <%= form.search_field :query, value: params[:query], class: "input join-item" %>
       <%= form.submit "Suchen", class: "btn btn-primary join-item" %>
     </div>
   </fieldset>
+  <% if params[:query].present? %>
+    <%= link_to "Zurücksetzen", recipes_path, class: "btn btn-ghost" %>
+  <% end %>
 <% end %>
 
 <hr class="my-4"/>
 
-<ul id="recipes" class="my-4 list space-y-4">
-  <% @recipes.each do |recipe| %>
-    <li class="list-item">
-      <%= render recipe %>
-    </li>
-  <% end %>
-</ul>
+<%# turbo_frame_tag "recipes_list" do %>
+<% if @recipes.any? %>
+  <ul id="recipes" class="my-4 list space-y-4">
+    <% @recipes.each do |recipe| %>
+      <li class="list-item">
+        <%= render recipe %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Keine Rezepte für "<%= params[:query] %>" gefunden.</p>
+<% end %>
+<%# end %>

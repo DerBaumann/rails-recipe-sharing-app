@@ -24,7 +24,9 @@
   <% end %>
 </ul>
 
-<pre><%= @recipe.instructions %></pre>
+<div class="prose max-w-none">
+  <%= simple_format(@recipe.instructions) %>
+</div>
 
 <div class="flex gap-4">
   <%= link_to "Back to recipes", recipes_path, class: "btn btn-neutral" %>

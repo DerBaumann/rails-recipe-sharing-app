@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <nav class="navbar glass shadow-md mb-4 sticky top-0">
+    <nav class="navbar glass shadow-md mb-4 sticky top-0 z-50">
       <div class="navbar-start">
         <ul class="flex gap-8">
           <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
@@ -53,7 +53,7 @@
       </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-8 py-4">
+    <main class="max-w-7xl mx-auto px-8 py-4 space-y-4">
       <%= yield %>
     </main>
   </body>

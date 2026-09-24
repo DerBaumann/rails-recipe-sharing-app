@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@plugin "@tailwindcss/typography";
+
 @source not "./daisyui{,*}.mjs";
 
 @plugin "./daisyui.mjs";
@@ -9,14 +11,16 @@
   /* custom theme here */
 }
 
-.h1 {
-  @apply text-4xl font-bold mb-4;
-}
+@layer components {
+  .h1 {
+    @apply text-4xl font-bold mb-4;
+  }
 
-.h2 {
-  @apply text-3xl font-bold mb-4;
-}
+  .h2 {
+    @apply text-3xl font-bold mb-4;
+  }
 
-.h3 {
-  @apply text-2xl font-bold mb-4;
+  .h3 {
+    @apply text-2xl font-bold mb-4;
+  }
 }

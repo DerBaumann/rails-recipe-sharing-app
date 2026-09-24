@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
     @comment = @recipe.comments.build(comment_params)
     @comment.author = Current.user
 
+    authorize @comment
+
     # Explicit locking
     saved = @recipe.with_lock do
       if @recipe.comments.exists?(author: Current.user)
@@ -52,7 +54,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Current.user.comments.find(params[:id])
+    @comment = @recipe.comments.find(params[:id])
+
+    authorize @comment
 
     return head :forbidden unless @comment.author == Current.user
 

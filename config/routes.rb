@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
+  root to: "recipes#index"
+
   resources :registrations, only: [ :new, :create ], path: "signup"
   resource :session
   resources :passwords, param: :token
-  root to: "recipes#index"
+
   resources :recipes do
     resource :favourite, only: [ :create, :destroy ]
     resources :comments, only: [ :create, :destroy ]
   end
   resources :favourites, only: [ :index ]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

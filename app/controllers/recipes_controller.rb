@@ -7,36 +7,34 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    base_query = if authenticated?
-      Recipe.published.or(Recipe.where(user: Current.user))
-    else
-      Recipe.published
-    end
-    # base_query = Recipe.published
-
-
-    @recipes = base_query.search_by_title(params[:query])
+    @recipes = policy_scope(Recipe).search_by_title(params[:query])
   end
 
   # GET /recipes/1 or /recipes/1.json
   def show
+    authorize @recipe
   end
 
   # GET /recipes/new
   def new
     @recipe = Recipe.new
-
     @recipe.ingredients.build
+
+    authorize @recipe
   end
 
   # GET /recipes/1/edit
   def edit
+    authorize @recipe
+
     @recipe.ingredients.build if @recipe.ingredients.empty?
   end
 
   # POST /recipes or /recipes.json
   def create
     @recipe = Current.user.recipes.build(recipe_params)
+
+    authorize @recipe
 
     # Explicit Transaction
     saved = ActiveRecord::Base.transaction do
@@ -56,6 +54,8 @@ class RecipesController < ApplicationController
 
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
+    authorize @recipe
+
     # Explicit Transaction
     updated = ActiveRecord::Base.transaction do
       @recipe.update(recipe_params) || raise(ActiveRecord::Rollback)
@@ -74,6 +74,8 @@ class RecipesController < ApplicationController
 
   # DELETE /recipes/1 or /recipes/1.json
   def destroy
+    authorize @recipe
+
     @recipe.destroy!
 
     respond_to do |format|
@@ -110,19 +112,5 @@ class RecipesController < ApplicationController
           :_destroy
         ]
       )
-
-      # params.expect(recipe: [
-      #   :title,
-      #   :prep_time_minutes,
-      #   :instructions,
-      #   :is_published,
-      #   ingredients_attributes: [
-      #     :id,
-      #     :name,
-      #     :amount,
-      #     :unit,
-      #     :_destroy
-      #   ]
-      # ])
     end
 end

@@ -1,7 +1,7 @@
 # Todos
 
-- [ ] Comments
-- [ ] Favourites
+- [x] Comments
+- [x] Favourites
 - [ ] Profil
 - [ ] Meine Rezepte
 - [ ] Rollen (gast (nicht registriert), mitglied (registriert), admin)

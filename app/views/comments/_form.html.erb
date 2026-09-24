@@ -1,0 +1,41 @@
+<%= form_with(model: [recipe, comment], id: "new_comment_form", class: "bg-base-200 p-4 rounded-box mb-6") do |f| %>
+  <% if comment.errors.any? %>
+    <div class="alert alert-error mb-4 text-sm">
+      <ul class="list-disc pl-4">
+        <% comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3 class="font-bold text-lg mb-3">Bewertung abgeben</h3>
+  <div class="form-control mb-4">
+    <label class="label"><span class="label-text font-semibold">Deine Bewertung:</span></label>
+    <div class="rating rating-md gap-1">
+      <% 1.upto(5) do |i| %>
+        <%= f.radio_button :rating,
+                       i,
+                       class: "mask mask-star-2 bg-amber-400",
+                       checked: (i == (comment.rating || 5)) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-control mb-3">
+    <%= f.label :title, "Titel", class: "label label-text font-semibold" %>
+    <%= f.text_field :title,
+                 class: "input input-bordered w-full",
+                 placeholder: "z.B. Super lecker!" %>
+  </div>
+
+  <div class="form-control mb-4">
+    <%= f.label :body, "Kommentar (optional)", class: "label label-text font-semibold" %>
+    <%= f.text_area :body,
+                rows: 3,
+                class: "textarea textarea-bordered w-full",
+                placeholder: "Was hat dir besonders gut gefallen?" %>
+  </div>
+
+  <%= f.submit "Bewertung abschicken", class: "btn btn-primary" %>
+<% end %>

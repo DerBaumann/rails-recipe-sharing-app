@@ -1,0 +1,13 @@
+<div
+  id="<%= dom_id(recipe, :comments_header) %>"
+  class="flex items-center gap-3 mb-6"
+>
+  <h2 class="text-2xl font-bold">Bewertungen (<%= recipe.comments.count %>)</h2>
+  <% if recipe.comments.any? %>
+    <div class="flex items-center gap-2">
+      <%= render "recipes/average_rating", rating: recipe.average_rating %>
+      <span class="text-sm font-bold"><%= recipe.average_rating %>
+        / 5.0</span>
+    </div>
+  <% end %>
+</div>

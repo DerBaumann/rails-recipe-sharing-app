@@ -2,6 +2,7 @@ class Recipe < ApplicationRecord
   has_many :ingredients, dependent: :destroy
   belongs_to :user
   has_many :favourites, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :ingredients, allow_destroy: true, reject_if: :all_blank
 
@@ -15,6 +16,11 @@ class Recipe < ApplicationRecord
   def favourited_by?(user)
     return false unless user
     favourites.exists?(user_id: user.id)
+  end
+
+  def average_rating
+    return 0.0 if comments.empty?
+    comments.average(:rating).round(1)
   end
 
   scope :published, -> { where(is_published: true) }

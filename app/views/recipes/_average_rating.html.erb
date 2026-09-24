@@ -1,0 +1,11 @@
+<% rating_value = (rating || 0).round %>
+
+<div class="inline-flex items-center gap-0.5">
+  <% 1.upto(5) do |i| %>
+    <% if i <= rating_value %>
+      <%= heroicon "star", options: { class: "size-6 fill-amber-400 text-amber-400" } %>
+    <% else %>
+      <%= heroicon "star", options: { class: "size-6 fill-base-300 text-base-300" } %>
+    <% end %>
+  <% end %>
+</div>

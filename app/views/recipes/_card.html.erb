@@ -15,11 +15,9 @@
     </p>
 
     <div class="card-actions justify-between items-center mt-4">
-      <div class="flex gap-1">
-        <%# TODO: Ratings %>
-        <% 5.times do %>
-          <%= heroicon "star", options: { class: "size-6 text-yellow-500" } %>
-        <% end %>
+      <div class="flex gap-1 items-center">
+        <%= render "recipes/average_rating", rating: recipe.average_rating %>
+        <span class="text-xs text-gray-400">(<%= recipe.comments.count %>)</span>
       </div>
       <%= render "favourites/toggle_button", recipe: recipe %>
     </div>

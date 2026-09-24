@@ -7,7 +7,6 @@
 
 <h1 class="h1"><%= @recipe.title %></h1>
 
-<%# TODO: Favourites count %>
 <p>
   <%= render "favourites/toggle_button", recipe: @recipe %>
 </p>
@@ -39,4 +38,16 @@
   <% end %>
 </div>
 
-<hr/>
+<hr class="my-8"/>
+
+<section class="mt-8">
+  <%= render "comments/header", recipe: @recipe %>
+
+  <%= render "comments/form_section", recipe: @recipe %>
+
+  <div id="comments_list">
+    <% @recipe.comments.order(created_at: :desc).each do |comment| %>
+      <%= render "comments/comment", comment: comment, recipe: @recipe %>
+    <% end %>
+  </div>
+</section>

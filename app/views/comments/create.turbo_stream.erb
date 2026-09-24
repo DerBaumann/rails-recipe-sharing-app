@@ -1,0 +1,18 @@
+<%= turbo_stream.prepend "comments_list",
+                     partial: "comments/comment",
+                     locals: {
+                       comment: @comment,
+                       recipe: @recipe,
+                     } %>
+
+<%= turbo_stream.replace "comment_form_section",
+                     partial: "comments/form_section",
+                     locals: {
+                       recipe: @recipe,
+                     } %>
+
+<%= turbo_stream.replace dom_id(@recipe, :comments_header),
+                     partial: "comments/header",
+                     locals: {
+                       recipe: @recipe,
+                     } %>

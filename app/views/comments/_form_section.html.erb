@@ -1,0 +1,11 @@
+<div id="comment_form_section">
+  <% if authenticated? %>
+    <% if recipe.comments.exists?(author: Current.user) %>
+      <div class="alert alert-info mb-6">
+        <span>Du hast dieses Rezept bereits bewertet.</span>
+      </div>
+    <% else %>
+      <%= render "comments/form", recipe: recipe, comment: Comment.new %>
+    <% end %>
+  <% end %>
+</div>

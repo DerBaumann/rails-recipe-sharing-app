@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root to: "recipes#index"
   resources :recipes do
     resource :favourite, only: [ :create, :destroy ]
+    resources :comments, only: [ :create, :destroy ]
   end
   resources :favourites, only: [ :index ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

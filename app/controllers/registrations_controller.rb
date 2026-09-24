@@ -1,5 +1,3 @@
-# TODO: Test app fails if passwords dont match
-
 class RegistrationsController < ApplicationController
   skip_before_action :require_authentication
 

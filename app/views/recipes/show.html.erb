@@ -1,11 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <div role="alert" class="alert alert-success mb-4">
+    <%= heroicon "check-badge", options: { class: "w-6" } %>
+    <span><%= notice %></span>
+  </div>
+<% end %>
 
 <h1 class="h1"><%= @recipe.title %></h1>
 
 <%# TODO: Favourites count %>
 <p>
-  <%= heroicon "heart", options: { class: "w-8 inline text-pink-500" } %>
-  420
+  <%= render "favourites/toggle_button", recipe: @recipe %>
 </p>
 
 <p><%= @recipe.prep_time_minutes %>min. Kochzeit</p>

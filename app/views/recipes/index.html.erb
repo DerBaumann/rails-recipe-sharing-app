@@ -1,4 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <div role="alert" class="alert alert-success mb-4">
+    <%= heroicon "check-badge", options: { class: "w-6" } %>
+    <span><%= notice %></span>
+  </div>
+<% end %>
 
 <% content_for :title, "Recipes" %>
 

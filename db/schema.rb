@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_23_145147) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_24_065258) do
+  create_table "favourites", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "recipe_id", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["recipe_id"], name: "index_favourites_on_recipe_id"
+    t.index ["user_id", "recipe_id"], name: "index_favourites_on_user_id_and_recipe_id", unique: true
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
   create_table "ingredients", force: :cascade do |t|
     t.decimal "amount", precision: 8, scale: 2, null: false
     t.datetime "created_at", null: false
@@ -49,6 +59,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_23_145147) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "favourites", "recipes"
+  add_foreign_key "favourites", "users"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "recipes", "users"
   add_foreign_key "sessions", "users"

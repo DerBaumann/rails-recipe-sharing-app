@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
   has_many :ingredients, dependent: :destroy
   belongs_to :user
+  has_many :favourites, dependent: :destroy
 
   accepts_nested_attributes_for :ingredients, allow_destroy: true, reject_if: :all_blank
 
@@ -9,6 +10,11 @@ class Recipe < ApplicationRecord
 
   def owned_by?(user)
     user.present? && self.user == user
+  end
+
+  def favourited_by?(user)
+    return false unless user
+    favourites.exists?(user_id: user.id)
   end
 
   scope :published, -> { where(is_published: true) }

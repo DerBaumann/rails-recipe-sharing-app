@@ -15,7 +15,7 @@
 
   <div class="flex justify-between gap-8">
     <p>TODO: Rating</p>
-    <p>TODO: Favourites</p>
+    <p><%= render "favourites/toggle_button", recipe: recipe %></p>
   </div>
   <p>
     <%= link_to "Show this recipe", recipe_path(recipe), class: "link" %>

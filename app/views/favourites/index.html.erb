@@ -1,4 +1,19 @@
-<div>
-  <h1 class="font-bold text-4xl">Favourites#index</h1>
-  <p>Find me in app/views/favourites/index.html.erb</p>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6 flex items-center gap-2">
+    <%= heroicon "heart", options: { class: "w-8 h-8 text-error fill-current" } %>
+    Meine Favoriten
+  </h1>
+
+  <% if @recipes.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% @recipes.each do |recipe| %>
+        <%= render "recipes/card", recipe: recipe, card_id: dom_id(recipe, :favourite_card) %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-12 bg-base-200 rounded-box">
+      <p class="text-lg text-neutral-600 mb-4">Du hast noch keine Favoriten gespeichert.</p>
+      <%= link_to "Rezepte durchstöbern", recipes_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>

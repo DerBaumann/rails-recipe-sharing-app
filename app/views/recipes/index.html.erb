@@ -10,7 +10,7 @@
 <% if authenticated? %>
   <div class="flex gap-4">
     <%= link_to "Neues Rezept", new_recipe_path, class: "btn btn-primary" %>
-    <%= link_to "Favoriten", "#", class: "btn btn-secondary" %>
+    <%= link_to "Favoriten", favourites_path, class: "btn btn-secondary" %>
   </div>
 <% end %>
 
@@ -38,7 +38,7 @@
   <ul id="recipes" class="my-4 list space-y-4">
     <% @recipes.each do |recipe| %>
       <li class="list-item">
-        <%= render recipe %>
+        <%= render "card", recipe: recipe %>
       </li>
     <% end %>
   </ul>

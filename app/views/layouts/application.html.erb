@@ -29,7 +29,7 @@
         <ul class="flex gap-8">
           <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
           <% if authenticated? %>
-            <li><%= link_to "Favoriten", "#", class: "btn btn-secondary" %></li>
+            <li><%= link_to "Favoriten", favourites_path, class: "btn btn-secondary" %></li>
           <% end %>
         </ul>
       </div>

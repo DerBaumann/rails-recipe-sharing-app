@@ -1,0 +1,38 @@
+<div class="max-w-3xl mx-auto space-y-6">
+  <div class="flex items-center justify-between">
+    <h1 class="text-3xl font-bold">Mein Profil</h1>
+    <%= link_to "Profil bearbeiten", edit_profile_path, class: "btn btn-outline btn-sm" %>
+  </div>
+
+  <div class="card bg-base-100 shadow border p-6 space-y-4">
+    <div class="flex justify-between items-center border-b pb-3">
+      <span class="font-semibold text-gray-600">E-Mail:</span>
+      <span><%= @user.email_address %></span>
+    </div>
+    <div class="flex justify-between items-center border-b pb-3">
+      <span class="font-semibold text-gray-600">Rolle:</span>
+      <span class="badge <%= @user.admin? ? 'badge-primary' : 'badge-ghost' %>">
+        <%= @user.role.capitalize %>
+      </span>
+    </div>
+  </div>
+
+  <div class="stats shadow w-full">
+    <div class="stat">
+      <div class="stat-title">Eigene Rezepte</div>
+      <div class="stat-value text-primary"><%= @my_recipes_count %></div>
+      <div class="stat-desc"><%= @published_count %>
+        veröffentlicht</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Favoriten</div>
+      <div class="stat-value text-secondary"><%= @favourites_count %></div>
+      <div class="stat-desc">Gespeicherte Rezepte</div>
+    </div>
+  </div>
+
+  <div class="flex gap-4">
+    <%= link_to "Meine Rezepte verwalten", my_recipes_path, class: "btn btn-primary" %>
+  </div>
+</div>

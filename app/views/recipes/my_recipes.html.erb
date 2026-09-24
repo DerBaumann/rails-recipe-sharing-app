@@ -1,0 +1,18 @@
+<div class="max-w-4xl mx-auto space-y-6">
+  <div class="flex justify-between items-center">
+    <h1 class="text-3xl font-bold">Meine Rezepte</h1>
+    <%= link_to "Neues Rezept erstellen", new_recipe_path, class: "btn btn-primary" %>
+  </div>
+
+  <% if @recipes.any? %>
+    <div class="grid gap-4 md:grid-cols-2">
+      <% @recipes.each do |recipe| %>
+        <%= render "recipes/card", recipe: recipe %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-info">
+      <span>Du hast bisher noch keine eigenen Rezepte angelegt.</span>
+    </div>
+  <% end %>
+</div>

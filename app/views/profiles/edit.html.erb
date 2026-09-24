@@ -1,0 +1,41 @@
+<div class="max-w-md mx-auto space-y-6">
+  <h1 class="text-2xl font-bold">Profil bearbeiten</h1>
+
+  <%= form_with model: @user, url: profile_path, method: :patch, class: "space-y-4" do |f| %>
+    <% if @user.errors.any? %>
+      <div class="alert alert-error">
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.label :email_address, "E-Mail-Adresse", class: "label font-medium" %>
+      <%= f.email_field :email_address,
+                    class: "input input-bordered w-full",
+                    required: true %>
+    </div>
+
+    <div>
+      <%= f.label :password,
+              "Neues Passwort (leer lassen für keine Änderung)",
+              class: "label font-medium" %>
+      <%= f.password_field :password, class: "input input-bordered w-full" %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation,
+              "Passwort bestätigen",
+              class: "label font-medium" %>
+      <%= f.password_field :password_confirmation, class: "input input-bordered w-full" %>
+    </div>
+
+    <div class="flex gap-3 pt-4">
+      <%= f.submit "Speichern", class: "btn btn-primary" %>
+      <%= link_to "Abbrechen", profile_path, class: "btn btn-ghost" %>
+    </div>
+  <% end %>
+</div>

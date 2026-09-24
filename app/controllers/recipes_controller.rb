@@ -10,6 +10,10 @@ class RecipesController < ApplicationController
     @recipes = policy_scope(Recipe).search_by_title(params[:query])
   end
 
+  def my_recipes
+    @recipes = Current.user.recipes.order(created_at: :desc)
+  end
+
   # GET /recipes/1 or /recipes/1.json
   def show
     authorize @recipe

@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
 
+  resource :profile, only: [ :show, :edit, :update ]
+  get "my_recipes", to: "recipes#my_recipes", as: :my_recipes
+
   resources :recipes do
     resource :favourite, only: [ :create, :destroy ]
     resources :comments, only: [ :create, :destroy ]

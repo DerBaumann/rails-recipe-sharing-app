@@ -39,6 +39,8 @@
       <div class="navbar-end">
         <ul class="flex gap-8">
           <% if authenticated? %>
+            <li><%= link_to "Profil", profile_path, class: "btn btn-outline btn-primary" %></li>
+            <li><%= link_to "Meine Rezepte", my_recipes_path, class: "btn btn-outline btn-secondary" %></li>
             <li><%= link_to "Logout",
               session_path,
               data: {

@@ -1,6 +1,6 @@
 class Recipe < ApplicationRecord
-  has_many :ingredients, dependent: :destroy
   belongs_to :user
+  has_many :ingredients, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :comments, dependent: :destroy
 

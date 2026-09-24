@@ -7,12 +7,12 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    # base_query = if authenticated?
-    #   Recipe.published.or(Recipe.where(user: Current.user))
-    # else
-    #   Recipe.published
-    # end
-    base_query = Recipe.published
+    base_query = if authenticated?
+      Recipe.published.or(Recipe.where(user: Current.user))
+    else
+      Recipe.published
+    end
+    # base_query = Recipe.published
 
 
     @recipes = base_query.search_by_title(params[:query])
@@ -38,8 +38,13 @@ class RecipesController < ApplicationController
   def create
     @recipe = Current.user.recipes.build(recipe_params)
 
+    # Explicit Transaction
+    saved = ActiveRecord::Base.transaction do
+      @recipe.save || raise(ActiveRecord::Rollback)
+    end
+
     respond_to do |format|
-      if @recipe.save
+      if saved
         format.html { redirect_to @recipe, notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       else
@@ -51,8 +56,13 @@ class RecipesController < ApplicationController
 
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
+    # Explicit Transaction
+    updated = ActiveRecord::Base.transaction do
+      @recipe.update(recipe_params) || raise(ActiveRecord::Rollback)
+    end
+
     respond_to do |format|
-      if @recipe.update(recipe_params)
+      if updated
         format.html { redirect_to @recipe, notice: "Recipe was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -76,8 +86,8 @@ class RecipesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
 
     def authorize_owner!
-      unless @recipe.user == Current.user
-        redirect_to recipes_path, alert: "You can only edit or delete your own recipes."
+      unless @recipe.owned_by?(Current.user)
+        redirect_to recipes_path, status: :forbidden, alert: "You can only edit or delete your own recipes."
       end
     end
 

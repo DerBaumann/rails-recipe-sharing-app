@@ -26,7 +26,7 @@
   <body>
     <nav class="navbar glass shadow-md mb-4 sticky top-0 z-50">
       <div class="navbar-start">
-        <ul class="flex gap-8">
+        <ul class="flex gap-2 md:gap-4 lg:gap-8">
           <li><%= link_to "Home", root_path, class: "btn btn-primary" %></li>
           <% if authenticated? %>
             <li><%= link_to "Favoriten", favourites_path, class: "btn btn-secondary" %></li>
@@ -34,10 +34,10 @@
         </ul>
       </div>
       <div class="navbar-center">
-        <p class="text-xl font-bold">Recipe Sharing App</p>
+        <p class="text-xl font-bold">SocialChef</p>
       </div>
       <div class="navbar-end">
-        <ul class="flex gap-8">
+        <ul class="flex gap-2 md:gap-4 lg:gap-8">
           <% if authenticated? %>
             <li><%= link_to "Profil", profile_path, class: "btn btn-outline btn-primary" %></li>
             <li><%= link_to "Meine Rezepte", my_recipes_path, class: "btn btn-outline btn-secondary" %></li>

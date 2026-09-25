@@ -7,10 +7,10 @@ class: INA24C
 
 # Projektantrag & Dokumentation M223 Recipe Sharing App – SocialChef
 
-* Modulname: 223 Multi-User-Applikationen objektorientiert realisieren
-* Datum: 25.09.2026
-* Autor: Pierre Wegmann
-* Schulklasse: INA24C
+- Modulname: 223 Multi-User-Applikationen objektorientiert realisieren
+- Datum: 25.09.2026
+- Autor: Pierre Wegmann
+- Schulklasse: INA24C
 
 ## Problemstellung
 
@@ -18,9 +18,9 @@ Kennt ihr das: Ihr kommt am Abend nach Hause, wollt etwas kochen, aber ihr habt 
 
 ## Projekt
 
-* **Domäne:** Ernährung und Gesundheit
-* **Name:** SocialChef
-* **Vision:** SocialChef soll als soziale Plattform dienen, auf der Benutzer ihre Rezepte teilen und andere Rezepte ansehen, bewerten oder speichern können. Das Konzept ist ähnlich wie GitHub, nur mit Rezepten statt Code.
+- **Domäne:** Ernährung und Gesundheit
+- **Name:** SocialChef
+- **Vision:** SocialChef soll als soziale Plattform dienen, auf der Benutzer ihre Rezepte teilen und andere Rezepte ansehen, bewerten oder speichern können. Das Konzept ist ähnlich wie GitHub, nur mit Rezepten statt Code.
 
 ## Projektplanung: 1. MVP-Iteration
 
@@ -51,15 +51,15 @@ In der ersten Iteration liegt der Fokus auf den Kernfunktionen der kollaborative
 
 ### Benutzerrollen
 
-* **Gast:** Kann öffentliche Rezepte suchen, lesen und Bewertungen ansehen. Kann sich registrieren und einloggen.
-* **Mitglied:** Kann eigene Rezepte verwalten (Entwurf/Veröffentlicht), fremde Rezepte einmalig mit 1–5 Sternen und einem Text bewerten, Favoriten verwalten und das eigene Profil bearbeiten.
-* **Admin:** Hat Moderationsrechte zum Löschen regelwidriger Rezepte und unangemessener Kommentare. Kann über den Pundit-Scope alle Entwürfe einsehen.
+- **Gast:** Kann öffentliche Rezepte suchen, lesen und Bewertungen ansehen. Kann sich registrieren und einloggen.
+- **Mitglied:** Kann eigene Rezepte verwalten (Entwurf/Veröffentlicht), fremde Rezepte einmalig mit 1–5 Sternen und einem Text bewerten, Favoriten verwalten und das eigene Profil bearbeiten.
+- **Admin:** Hat Moderationsrechte zum Löschen regelwidriger Rezepte und unangemessener Kommentare. Kann über den Pundit-Scope alle Entwürfe einsehen.
 
 ### Locking und Transaktionen
 
-* **Transaktionen – Erstellung / Aktualisierung von Rezepten:**
+- **Transaktionen – Erstellung / Aktualisierung von Rezepten:**
   Das Rezept und die zugehörigen Zutaten werden innerhalb einer expliziten Datenbanktransaktion verarbeitet. Schlägt die Validierung einer Zutat oder des Rezepts fehl, wird mit `ActiveRecord::Rollback` die gesamte Transaktion zurückgesetzt. Dadurch werden Dateninkonsistenzen verhindert.
-* **Pessimistic Locking – Rezensionsverwaltung:**
+- **Pessimistic Locking – Rezensionsverwaltung:**
   Beim Erstellen und Löschen von Kommentaren wird der betroffene Rezept-Datensatz mittels Pessimistic Row-Level Locking gesperrt. Dadurch werden Lost Updates bei der dynamischen Durchschnittsbewertung (`comments.average(:rating)`) verhindert. Ein eindeutiger Datenbank-Index auf `[recipe_id, author_id]` verhindert parallele Mehrfachbewertungen auf Datenbankebene. Ein daraus entstehendes `RecordNotUnique` wird entsprechend behandelt.
 
 ### ERM
@@ -225,6 +225,6 @@ ActivityLog
 
 ## Erreichter Stand, Abweichungen & offene Punkte
 
-* **Erreichter Stand:** Alle Kernfunktionen (Authentifizierung, Pundit-Autorisierung, DB-Transaktionen, Pessimistic Locking, Audit-Logging, Profil und Favoriten) wurden vollständig umgesetzt.
-* **Begründete Abweichung:** Das Rating wird dynamisch mit `comments.average(:rating)` berechnet, anstatt Zähler-Spalten in `recipes` zu pflegen. Dadurch werden fehlerhafte Zählerstände bei Löschvorgängen vermieden.
-* **Offene Punkte:** Bild-Uploads mit ActiveStorage und Kategorie-Tags sind für eine spätere Erweiterung vorgesehen.
+- **Erreichter Stand:** Alle Kernfunktionen (Authentifizierung, Pundit-Autorisierung, DB-Transaktionen, Pessimistic Locking, Audit-Logging, Profil und Favoriten) wurden vollständig umgesetzt.
+- **Begründete Abweichung:** Das Rating wird dynamisch mit `comments.average(:rating)` berechnet, anstatt Zähler-Spalten in `recipes` zu pflegen. Dadurch werden fehlerhafte Zählerstände bei Löschvorgängen vermieden.
+- **Offene Punkte:** Bild-Uploads mit ActiveStorage und Kategorie-Tags sind für eine spätere Erweiterung vorgesehen.

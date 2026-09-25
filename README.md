@@ -44,3 +44,14 @@ bin/dev # Starts dev server. Required for tailwind
 ```
 
 The application will then be accessible in your browser at http://localhost:3000.
+
+## Testing
+
+Tests can be run with the following commands:
+
+```sh
+rails db:test:prepare
+rails test
+```
+
+There is also a github action that runs the tests on every push

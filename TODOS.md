@@ -9,5 +9,5 @@
 - [ ] Tests
 - [x] Logging
 
-- [ ] Dokumentation
+- [x] Dokumentation
 - [ ] Präsentation

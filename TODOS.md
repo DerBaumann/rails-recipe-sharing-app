@@ -11,4 +11,4 @@
 
 - [x] Dokumentation
 - [x] Präsentation
-- [ ] Readme
+- [x] Readme

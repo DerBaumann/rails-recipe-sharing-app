@@ -39,6 +39,7 @@ git clone https://github.com/DerBaumann/rails-recipe-sharing-app.git
 cd rails-recipe-sharing-app
 rails db:create
 rails db:migrate
+rails db:seed
 bin/dev # Starts dev server. Required for tailwind
 ```
 

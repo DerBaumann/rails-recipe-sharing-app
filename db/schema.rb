@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_24_133047) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_25_062843) do
+  create_table "activity_logs", force: :cascade do |t|
+    t.string "action", null: false
+    t.datetime "created_at", null: false
+    t.text "details", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_activity_logs_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "author_id", null: false
     t.text "body"
@@ -73,6 +82,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_24_133047) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "activity_logs", "users"
   add_foreign_key "comments", "recipes"
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "favourites", "recipes"

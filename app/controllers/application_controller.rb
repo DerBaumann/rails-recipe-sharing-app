@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
+  after_action :log_activity
+
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
@@ -21,4 +23,26 @@ class ApplicationController < ActionController::Base
       format.json { render json: { error: "Forbidden" }, status: :forbidden }
     end
   end
+
+  private
+    def log_activity
+      return if Current.user.nil?
+
+      clean_params = request.filtered_parameters.except(
+        "controller", "action", "authenticity_token", "_method", "commit"
+      )
+
+      log_details = {
+        status: response.status,
+        method: request.request_method,
+        ip: request.remote_ip,
+        params: clean_params
+      }.to_json
+
+      ActivityLog.create!(
+        user: Current.user,
+        action: "#{controller_name}##{action_name}",
+        details: log_details
+      )
+    end
 end

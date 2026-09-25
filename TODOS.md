@@ -10,4 +10,5 @@
 - [x] Logging
 
 - [x] Dokumentation
-- [ ] Präsentation
+- [x] Präsentation
+- [ ] Readme

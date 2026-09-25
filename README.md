@@ -1,24 +1,45 @@
-# README
+# SocialChef - Recipe Sharing App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+SocialChef is a collaborative web application for creating, sharing, rating, and managing recipes.
 
-Things you may want to cover:
+> The detailed project documentation (problem statement, vision, ERM, breadboards, locking/transactions, and test results) can be found in the [`/docs`](docs/) directory.
 
-* Ruby version
+## Tech Stack
 
-* System dependencies
+- **Language / Framework:** Ruby / Ruby on Rails
+- **Database:** SQLite3
+- **Frontend:** ERB, Tailwind, DaisyUI, Turbo & Stimulus (Hotwire)
+- **Authorization:** Pundit
+- **Testing:** Minitest / RSpec
 
-* Configuration
+## Prerequisites
 
-* Database creation
+Ensure the following components are installed on your system:
 
-* Database initialization
+- Ruby 4.0.6
+- Rails 8.1
+- Bundler (`gem install bundler`)
+- Git
+- SQLite3
 
-* How to run the test suite
+If you use `mise` you can just run the following:
 
-* Services (job queues, cache servers, search engines, etc.)
+```sh
+mise use -g ruby@4.0.6
+gem install rails
+```
 
-* Deployment instructions
 
-* ...
+## Installation & Configuration
+
+Follow these steps in your terminal to set up the application from a fresh clone:
+
+```sh
+git clone https://github.com/DerBaumann/rails-recipe-sharing-app.git
+cd rails-recipe-sharing-app
+rails db:create
+rails db:migrate
+bin/dev # Starts dev server. Required for tailwind
+```
+
+The application will then be accessible in your browser at http://localhost:3000.

@@ -55,3 +55,11 @@ rails test
 ```
 
 There is also a github action that runs the tests on every push
+
+## Users
+
+There are a total of 3 Test-Users. All of them use "P4ssw0rd!" as their Password
+
+- admin@test.com (admin)
+- member1@test.com (member)
+- member2@test.com (member)

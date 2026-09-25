@@ -3,7 +3,7 @@ module: 223 Multi-User-Applikationen objektorientiert realisieren
 date: 25.09.2026
 author: Pierre Wegmann
 class: INA24C
--------------
+---
 
 # Projektantrag & Dokumentation M223 Recipe Sharing App – SocialChef
 
@@ -228,3 +228,11 @@ ActivityLog
 - **Erreichter Stand:** Alle Kernfunktionen (Authentifizierung, Pundit-Autorisierung, DB-Transaktionen, Pessimistic Locking, Audit-Logging, Profil und Favoriten) wurden vollständig umgesetzt.
 - **Begründete Abweichung:** Das Rating wird dynamisch mit `comments.average(:rating)` berechnet, anstatt Zähler-Spalten in `recipes` zu pflegen. Dadurch werden fehlerhafte Zählerstände bei Löschvorgängen vermieden.
 - **Offene Punkte:** Bild-Uploads mit ActiveStorage und Kategorie-Tags sind für eine spätere Erweiterung vorgesehen.
+
+## Nutzer
+
+Das System besitzt 3 Demo-Nutzer. Alle nutzen "P4ssw0rd!" als Passwort.
+
+- admin@test.com (admin)
+- member1@test.com (member)
+- member2@test.com (member)

@@ -1,11 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  action: MyString
-  details: MyText
-
-two:
-  user: two
-  action: MyString
-  details: MyText
+sample_create_log:
+  user: member1
+  action: recipes#create
+  details: '{"status":200,"method":"POST","ip":"127.0.0.1","params":{"title":"Klassische Spaghetti Carbonara"}}'

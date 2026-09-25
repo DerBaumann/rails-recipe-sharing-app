@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  recipe: one
+member1_favourite_avocado:
+  user: member1
+  recipe: avocado_toast
 
-two:
-  user: two
-  recipe: two
+member2_favourite_carbonara:
+  user: member2
+  recipe: carbonara

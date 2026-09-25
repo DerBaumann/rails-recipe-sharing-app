@@ -1,13 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  prep_time_minutes: 1
-  instructions: MyText
-  is_published: false
+carbonara:
+  title: Klassische Spaghetti Carbonara
+  instructions: Pasta kochen, Speck anbraten, Ei und Käse verrühren.
+  prep_time_minutes: 20
+  is_published: true
+  user: member1
 
-two:
-  title: MyString
-  prep_time_minutes: 1
-  instructions: MyText
+draft_mousse:
+  title: Geheimes Schokoladen-Mousse
+  instructions: Noch in Arbeit.
+  prep_time_minutes: 45
   is_published: false
+  user: member1
+
+avocado_toast:
+  title: Avocado Toast
+  instructions: Brot rösten, Avocado zerdrücken.
+  prep_time_minutes: 10
+  is_published: true
+  user: member2

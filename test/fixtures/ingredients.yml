@@ -1,13 +1,31 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  amount: 9.99
-  unit: MyString
-  recipe: one
+carbonara_spaghetti:
+  recipe: carbonara
+  name: Spaghetti
+  amount: 400
+  unit: g
 
-two:
-  name: MyString
-  amount: 9.99
-  unit: MyString
-  recipe: two
+carbonara_guanciale:
+  recipe: carbonara
+  name: Guanciale oder Pancetta
+  amount: 150
+  unit: g
+
+carbonara_egg:
+  recipe: carbonara
+  name: Eigelb
+  amount: 4
+  unit: Stück
+
+avocado_toast_bread:
+  recipe: avocado_toast
+  name: Sauerteigbrot
+  amount: 2
+  unit: Scheiben
+
+avocado_toast_avocado:
+  recipe: avocado_toast
+  name: Reife Avocado
+  amount: 1
+  unit: Stück

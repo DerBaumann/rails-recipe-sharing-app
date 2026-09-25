@@ -1,11 +1,18 @@
 <%= turbo_frame_tag dom_id(recipe, :favourite_button) do %>
-  <% if recipe.favourited_by?(Current.user) %>
-    <%= button_to recipe_favourite_path(recipe), method: :delete, class: "btn btn-ghost" do %>
-      <%= heroicon "heart", options: { class: "size-6 fill-current text-pink-500" } %>
-      <%= recipe.favourites.count %>
+  <% if Current.user %>
+    <% if recipe.favourited_by?(Current.user) %>
+      <%= button_to recipe_favourite_path(recipe), method: :delete, class: "btn btn-ghost" do %>
+        <%= heroicon "heart", options: { class: "size-6 fill-current text-pink-500" } %>
+        <%= recipe.favourites.count %>
+      <% end %>
+    <% else %>
+      <%= button_to recipe_favourite_path(recipe), method: :post, class: "btn btn-ghost" do %>
+        <%= heroicon "heart", options: { class: "size-6" } %>
+        <%= recipe.favourites.count %>
+      <% end %>
     <% end %>
   <% else %>
-    <%= button_to recipe_favourite_path(recipe), method: :post, class: "btn btn-ghost" do %>
+    <%= link_to new_session_path, data: { turbo_frame: "_top" }, class: "btn btn-ghost" do %>
       <%= heroicon "heart", options: { class: "size-6" } %>
       <%= recipe.favourites.count %>
     <% end %>
